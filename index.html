@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brecher-Reparatur Oberösterreich | TIBE Zerkleinerungstechnik</title>
+<meta name="description" content="Ihr Brecher steht? TIBE repariert Backenbrecher, Prallmühlen und Walzenbrecher herstellerunabhängig — jede Marke, jedes Baujahr, auch wenn es den Hersteller nicht mehr gibt. Seit 1987 aus Redlham, Oberösterreich. Anruf: 07673 6425">
+
+<!-- ==========================================================
+     TIBE Zerkleinerungstechnik GmbH — Startseite
+     Eine Datei, kein Framework, keine externen Abhängigkeiten.
+     Läuft per Doppelklick im Browser.
+
+     WO SIE WAS ÄNDERN:
+     - Farben ............ Block "FARBEN" direkt unten
+     - Kontaktdaten ...... suchen nach:  KONTAKTDATEN
+     - Texte ............. jeder Abschnitt trägt eine Überschrift
+                           "ABSCHNITT 1" bis "ABSCHNITT 13" im Kommentar
+     - Fehlende Bilder ... suchen nach:  BILD FEHLT
+     ========================================================== -->
+
+<style>
+/* ===================== FARBEN =====================
+   Aus dem Briefing. Hier ändern, wirkt überall.
+   Hinweis zur Lesbarkeit (WCAG AA, mind. 4,5:1):
+   --green (#8CBD3A) und --amber (#D98F1F) sind auf hellem
+   Grund NICHT als Textfarbe geeignet. Für grünen Text
+   deshalb immer --green-dark verwenden, Bernstein nur als
+   Flächenfarbe mit dunkler Schrift darauf.
+   ================================================== */
+:root{
+  --ink:#2A2A2D;          /* Anthrazit — Marke */
+  --ink-soft:#55534F;     /* Fließtext auf hellem Grund */
+  --paper:#FAFAF8;
+  --paper-alt:#F1EFEA;
+  /* ZWEI GRÜNTÖNE, und das hat einen Grund:
+     --green ist das echte Grün aus der Logodatei. Auf Anthrazit
+     erreicht es 6,4:1 und ist damit gut lesbar — auf hellem Grund
+     nur 2,1:1, dort also NIE für Text verwenden.
+     --green-dark ist die abgedunkelte Variante für grünen Text auf
+     hellem Grund (4,9:1, erfüllt WCAG AA).
+     Das Briefing nannte RAL 6018 (#61993B); die Logodatei enthält
+     tatsächlich #8CBD3A. Wir folgen der Logodatei. */
+  --green:#8CBD3A;        /* Logogrün — nur auf dunklem Grund */
+  --green-dark:#4C7A2E;   /* grüner Text auf hellem Grund */
+  --amber:#D98F1F;        /* Bernstein — Farbe des Anruf-Knopfes */
+  --amber-hover:#C07C13;
+  --amber-tint:#FBF1E0;
+  --line:#E0DDD5;
+  --line-dark:#45454A;
+  --brick:#B23A2E;        /* Reserve. Wenn der Anruf-Knopf noch
+                             dringlicher wirken soll: unten bei
+                             .btn-call background auf var(--brick)
+                             und color auf #fff stellen. */
+
+  --shell:min(1120px,100%);
+}
+
+*{box-sizing:border-box;}
+
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *{transition:none !important;}
+}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  /* Systemschriften — keine Ladezeit, kein externer Abruf */
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-size:17px;
+  line-height:1.6;
+  -webkit-text-size-adjust:100%;
+  /* Platz für die klebende Anruf-Leiste am Handy */
+  padding-bottom:76px;
+}
+@media (min-width:800px){
+  body{padding-bottom:0;}
+}
+
+img{max-width:100%;height:auto;display:block;}
+
+h1,h2,h3{
+  margin:0;
+  font-weight:800;
+  letter-spacing:-0.02em;
+  line-height:1.12;
+  color:var(--ink);
+  text-wrap:balance;
+}
+h1{font-size:clamp(2rem,7vw,3.4rem);}
+h2{font-size:clamp(1.5rem,4.6vw,2.3rem);}
+h3{font-size:1.1rem;letter-spacing:-0.01em;}
+p{margin:0 0 1rem;}
+
+a{color:var(--green-dark);}
+
+/* Sichtbarer Fokus — Bedienbarkeit per Tastatur */
+a:focus-visible,button:focus-visible,input:focus-visible,
+textarea:focus-visible,select:focus-visible,summary:focus-visible{
+  outline:3px solid var(--amber);
+  outline-offset:3px;
+  border-radius:3px;
+}
+
+.shell{width:var(--shell);margin:0 auto;padding:0 20px;}
+@media (min-width:800px){.shell{padding:0 32px;}}
+
+section{padding:52px 0;}
+@media (min-width:800px){section{padding:80px 0;}}
+
+.eyebrow{
+  font-size:0.8rem;
+  font-weight:700;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--green-dark);
+  margin:0 0 10px;
+}
+.lede{
+  font-size:clamp(1.05rem,2.6vw,1.3rem);
+  color:var(--ink-soft);
+  max-width:62ch;
+}
+
+/* Sprunglink für Tastatur- und Screenreader-Nutzung */
+.skip{
+  position:absolute;left:-9999px;top:0;
+  background:var(--ink);color:#fff;
+  padding:12px 18px;z-index:200;font-weight:700;
+}
+.skip:focus{left:8px;top:8px;}
+
+/* ---------- Logo ----------
+   Zwei freigestellte Dateien mit transparentem Hintergrund:
+     tibe-logo-hell.png    fuer dunklen Grund (Kopfzeile, Fusszeile)
+     tibe-logo-dunkel.png  fuer hellen Grund
+   Hoehe hier aendern, die Breite folgt automatisch. */
+.logo{display:inline-flex;align-items:center;text-decoration:none;}
+.logo img{height:34px;width:auto;display:block;}
+.footer-end .logo img{height:30px;}
+
+/* ================= 1. KLEBENDE KOPFZEILE =================
+   Der Anruf ist auf jedem Scrollstand erreichbar. */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:var(--ink);
+  border-bottom:1px solid var(--line-dark);
+}
+.topbar .inner{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;padding:12px 0;
+}
+.topbar-phone{
+  display:none;
+  align-items:center;gap:10px;
+  color:var(--paper);text-decoration:none;
+  font-weight:800;font-size:1.05rem;
+}
+.topbar-phone span{
+  display:block;font-size:0.68rem;font-weight:600;
+  color:#B9B7B0;letter-spacing:0.06em;text-transform:uppercase;
+}
+@media (min-width:800px){.topbar-phone{display:flex;}}
+
+.nav{display:none;gap:24px;}
+.nav a{
+  color:#D8D6D0;text-decoration:none;font-size:0.92rem;font-weight:600;
+}
+.nav a:hover{color:var(--paper);text-decoration:underline;}
+@media (min-width:1000px){.nav{display:flex;}}
+
+/* ---------- Knöpfe ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:10px;
+  font:inherit;font-weight:800;
+  text-decoration:none;text-align:center;
+  border:2px solid transparent;border-radius:8px;
+  padding:16px 24px;
+  min-height:56px;              /* gut treffbar mit dem Daumen */
+  cursor:pointer;
+  transition:background-color .15s ease,transform .05s ease;
+}
+.btn:active{transform:translateY(1px);}
+
+/* Der eine primäre Knopf der Seite. Bernstein mit anthrazitfarbener
+   Schrift = 5,4:1 Kontrast, erfüllt WCAG AA. */
+.btn-call{
+  background:var(--amber);
+  color:#2A2A2D;
+  font-size:1.1rem;
+  box-shadow:0 2px 0 rgba(0,0,0,.18);
+}
+.btn-call:hover{background:var(--amber-hover);}
+.btn-call .num{white-space:nowrap;}
+
+.btn-ghost{
+  background:transparent;color:var(--paper);
+  border-color:#6E6E74;font-size:0.98rem;font-weight:700;
+}
+.btn-ghost:hover{border-color:var(--paper);}
+
+.btn-quiet{
+  background:var(--ink);color:var(--paper);font-size:1rem;
+}
+.btn-quiet:hover{background:#3C3C42;}
+
+.btn-block{width:100%;}
+@media (min-width:560px){.btn-block{width:auto;}}
+
+/* ================= 2. ABOVE THE FOLD =================
+   Was, für wen, was tun — in drei Sekunden.
+   Wichtigste Aussage links oben (F-Muster). */
+.hero{
+  background:var(--ink);
+  color:var(--paper);
+  padding:44px 0 40px;
+  border-bottom:6px solid var(--green);
+}
+@media (min-width:800px){.hero{padding:76px 0 68px;}}
+.hero h1{color:var(--paper);max-width:22ch;}
+.hero h1 em{font-style:normal;color:var(--green);}
+.hero .claim{
+  font-size:clamp(1.05rem,2.5vw,1.28rem);
+  color:#D8D6D0;
+  max-width:52ch;
+  margin:20px 0 0;
+}
+.hero-actions{
+  display:flex;flex-direction:column;gap:12px;
+  margin:30px 0 0;
+}
+@media (min-width:560px){
+  .hero-actions{flex-direction:row;flex-wrap:wrap;align-items:center;}
+}
+.hero-hours{
+  margin:20px 0 0;font-size:0.92rem;color:#B9B7B0;max-width:48ch;
+}
+.hero-hours a{color:var(--paper);font-weight:700;}
+.hero-badges{
+  display:flex;flex-wrap:wrap;gap:8px 10px;
+  margin:34px 0 0;padding:0;list-style:none;
+  border-top:1px solid var(--line-dark);padding-top:20px;
+}
+.hero-badges li{
+  font-size:0.82rem;font-weight:700;color:#D8D6D0;
+  background:#37373D;border-radius:20px;padding:6px 14px;
+}
+
+/* ================= 3. PROBLEM ================= */
+.problem{background:var(--paper-alt);}
+.qcard{
+  background:var(--paper);
+  border-left:5px solid var(--amber);
+  border-radius:0 10px 10px 0;
+  padding:22px;
+  margin:0 0 16px;
+}
+.qcard blockquote{
+  margin:0 0 10px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-style:italic;
+  font-size:clamp(1.05rem,2.6vw,1.24rem);
+  line-height:1.45;
+  color:var(--ink);
+}
+.qcard cite{
+  font-style:normal;font-size:0.82rem;font-weight:700;
+  letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.answer{
+  margin:26px 0 0;
+  font-size:clamp(1.1rem,2.8vw,1.35rem);
+  font-weight:800;
+  letter-spacing:-0.01em;
+  max-width:50ch;
+}
+
+/* ---------- Raster ---------- */
+.grid{display:grid;gap:18px;margin:32px 0 0;}
+@media (min-width:640px){
+  .grid-3{grid-template-columns:repeat(3,1fr);}
+  .grid-2{grid-template-columns:repeat(2,1fr);}
+}
+
+.card{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:22px;
+}
+.card h3{margin-bottom:8px;}
+.card p{margin:0;color:var(--ink-soft);font-size:0.97rem;}
+.card .kicker{
+  font-size:0.78rem;font-weight:700;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--green-dark);
+  margin:0 0 8px;
+}
+
+/* ---------- Herstellerwand ---------- */
+.marken-block{
+  margin:34px 0 0;padding:26px 22px;
+  background:var(--ink);color:var(--paper);border-radius:12px;
+}
+@media (min-width:800px){.marken-block{padding:32px;}}
+.marken-block h3{color:var(--paper);font-size:1.25rem;margin-bottom:10px;}
+.marken-intro{color:#D8D6D0;font-size:1rem;max-width:60ch;margin:0 0 20px;}
+.marken{
+  display:flex;flex-wrap:wrap;gap:10px;
+  list-style:none;margin:0 0 20px;padding:0;
+}
+.marken li{
+  background:#37373D;border:1px solid var(--line-dark);
+  border-radius:6px;padding:9px 14px;
+  font-weight:700;font-size:0.97rem;color:var(--paper);
+}
+/* "und viele weitere" bewusst leiser als die echten Namen */
+.marken li.mehr{
+  background:transparent;border-style:dashed;
+  color:#B9B7B0;font-weight:600;font-style:italic;
+}
+.marken-fuss{margin:0;font-size:0.95rem;color:#D8D6D0;max-width:58ch;}
+.marken-fuss a{color:var(--paper);}
+
+/* ================= 5. ABLAUF ================= */
+.steps{counter-reset:s;list-style:none;margin:34px 0 0;padding:0;}
+.step{
+  position:relative;
+  padding:0 0 26px 62px;
+  border-left:2px solid var(--line);
+  margin-left:20px;
+}
+.step:last-child{border-left-color:transparent;padding-bottom:0;}
+.step::before{
+  counter-increment:s;content:counter(s);
+  position:absolute;left:-22px;top:-4px;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--green-dark);color:#fff;
+  font-weight:800;font-size:1.15rem;
+  display:flex;align-items:center;justify-content:center;
+}
+.step h3{margin-bottom:6px;}
+.step p{color:var(--ink-soft);margin:0;}
+
+/* ================= 6. ZAHLEN ================= */
+.proof{background:var(--ink);color:var(--paper);}
+.proof h2{color:var(--paper);max-width:26ch;}
+.proof .lede{color:#D8D6D0;}
+.stats{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:2px;
+  margin:36px 0 0;background:var(--line-dark);
+  border:1px solid var(--line-dark);border-radius:10px;overflow:hidden;
+}
+@media (min-width:800px){.stats{grid-template-columns:repeat(4,1fr);}}
+.stat{background:var(--ink);padding:22px 18px;}
+.stat .num{
+  font-size:clamp(2.1rem,6vw,2.9rem);font-weight:800;
+  letter-spacing:-0.03em;line-height:1;color:var(--green);
+}
+.stat .label{
+  font-size:0.88rem;color:#D8D6D0;margin-top:8px;display:block;
+}
+
+/* ================= 7. VERGLEICH ================= */
+.vs{display:grid;gap:18px;margin:32px 0 0;}
+@media (min-width:760px){.vs{grid-template-columns:1fr 1fr;}}
+.vs-col{border-radius:10px;padding:24px;}
+.vs-col.them{background:var(--paper-alt);}
+.vs-col.us{background:var(--ink);color:var(--paper);}
+.vs-col.us h3{color:var(--paper);}
+.vs-col h3{font-size:1.05rem;margin-bottom:14px;}
+.vs-col ul{margin:0;padding:0;list-style:none;}
+.vs-col li{
+  padding:10px 0 10px 30px;position:relative;font-size:0.97rem;
+  border-top:1px solid var(--line);
+}
+.vs-col.us li{border-top-color:var(--line-dark);color:#E2E0DA;}
+.vs-col li:first-child{border-top:none;}
+.vs-col li::before{
+  content:"–";position:absolute;left:6px;font-weight:800;
+  color:var(--ink-soft);
+}
+.vs-col.us li::before{content:"✓";color:var(--green);}
+.fairness{
+  margin:22px 0 0;padding:18px 20px;
+  background:var(--amber-tint);border-radius:10px;
+  font-size:0.95rem;color:#4A3A18;
+}
+.fairness b{color:#3D2A05;}
+
+/* ---------- BILD FEHLT: Platzhalter ---------- */
+.ph{
+  border:3px dashed var(--green-dark);
+  background:repeating-linear-gradient(135deg,#EFEDE7 0 12px,#F7F5F1 12px 24px);
+  border-radius:10px;
+  padding:26px 20px;
+  display:flex;flex-direction:column;justify-content:center;
+  min-height:190px;
+}
+.ph .tagword{
+  display:inline-block;align-self:flex-start;
+  background:var(--green-dark);color:#fff;
+  font-size:0.7rem;font-weight:800;letter-spacing:0.1em;
+  text-transform:uppercase;padding:4px 10px;border-radius:4px;
+  margin-bottom:12px;
+}
+.ph strong{display:block;font-size:1rem;margin-bottom:6px;}
+.ph span.desc{font-size:0.9rem;color:var(--ink-soft);}
+figure{margin:0;}
+figcaption{font-size:0.85rem;color:var(--ink-soft);margin-top:10px;}
+/* Fotos: Ecken abgerundet, Höhe folgt der Breite.
+   Der gestreifte Hintergrund und der Rahmen sind nur sichtbar,
+   solange eine Bilddatei noch fehlt — dann steht dort der
+   Alternativtext im gestrichelten Kasten. Sobald das Foto im
+   Ordner liegt, verdeckt es beides. */
+.foto{
+  border-radius:10px;width:100%;height:auto;
+  min-height:150px;
+  background:repeating-linear-gradient(135deg,#EFEDE7 0 12px,#F7F5F1 12px 24px);
+  font-size:0.9rem;color:var(--ink-soft);
+}
+
+/* Fallstreifen unter dem Vorher/Nachher-Paar */
+.fallstreifen{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:2px;
+  margin:28px 0 0;background:var(--line);
+  border:1px solid var(--line);border-radius:10px;overflow:hidden;
+}
+@media (min-width:800px){.fallstreifen{grid-template-columns:repeat(4,1fr);}}
+.fallstreifen>div{background:var(--paper);padding:16px 18px;}
+.fl-label{
+  display:block;font-size:0.75rem;font-weight:700;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--green-dark);margin-bottom:4px;
+}
+.fl-wert{display:block;font-weight:800;font-size:1.02rem;}
+
+/* ================= 9. ÜBER UNS ================= */
+.about{background:var(--paper-alt);}
+.about-wrap{display:grid;gap:26px;margin-top:32px;}
+@media (min-width:820px){
+  .about-wrap{grid-template-columns:1fr 1fr;align-items:start;}
+}
+.signature{
+  margin:22px 0 0;padding:18px 20px;
+  background:var(--paper);border-left:5px solid var(--green);
+  border-radius:0 10px 10px 0;
+}
+.signature .who{font-weight:800;font-size:1.05rem;}
+.signature .role{font-size:0.9rem;color:var(--ink-soft);}
+
+/* ================= 10. PLANER ZUM MITNEHMEN =================
+   Tauschgeschäft: E-Mail-Adresse gegen den Verschleißzyklen-Planer
+   als PDF. Bewusst ein einziges Feld — jedes weitere Pflichtfeld
+   kostet Eintragungen und wäre außerdem eine Angabe, die wir für
+   den Versand nicht brauchen.
+   ============================================================ */
+.planer{background:var(--ink);color:var(--paper);}
+.planer h2{color:var(--paper);}
+.planer .lede{color:#D8D6D0;}
+.planer-wrap{display:grid;gap:26px;margin-top:30px;align-items:start;}
+@media (min-width:880px){
+  .planer-wrap{grid-template-columns:1.05fr 0.95fr;gap:40px;}
+}
+.planer-liste{margin:0;padding:0;list-style:none;}
+.planer-liste li{
+  position:relative;padding-left:28px;margin:0 0 12px;
+  color:#D8D6D0;font-size:0.97rem;line-height:1.5;
+}
+.planer-liste li::before{
+  content:"";position:absolute;left:0;top:7px;
+  width:13px;height:13px;border-radius:3px;background:var(--green);
+}
+.planer-box{
+  background:var(--paper);color:var(--ink);
+  border:1px solid var(--line);border-radius:12px;padding:24px;
+}
+@media (min-width:800px){.planer-box{padding:28px;}}
+.planer-box .field{margin-bottom:0;}
+.planer-privacy{
+  font-size:0.86rem;color:var(--ink-soft);line-height:1.55;
+  margin:16px 0 0;
+}
+.planer-fertig{margin:18px 0 0;}
+.planer-fertig p{margin:0 0 12px;font-weight:700;}
+
+/* ================= 11. FORMULAR ================= */
+.formbox{
+  background:var(--paper);border:1px solid var(--line);
+  border-radius:12px;padding:24px;margin-top:30px;
+}
+@media (min-width:800px){.formbox{padding:32px;}}
+.field{margin:0 0 18px;}
+.field label{
+  display:block;font-weight:700;font-size:0.95rem;margin-bottom:6px;
+}
+.field .hint{
+  display:block;font-weight:400;font-size:0.85rem;
+  color:var(--ink-soft);margin-top:2px;
+}
+.field input,.field textarea{
+  width:100%;font:inherit;font-size:1rem;
+  padding:14px;
+  border:2px solid #B9B5AC;border-radius:8px;
+  background:#fff;color:var(--ink);
+  min-height:52px;
+}
+.field textarea{min-height:110px;resize:vertical;}
+.field input:hover,.field textarea:hover{border-color:var(--ink-soft);}
+.consent{
+  display:flex;gap:12px;align-items:flex-start;
+  margin:0 0 20px;font-size:0.92rem;color:var(--ink-soft);
+}
+.consent input{width:26px;height:26px;flex:0 0 auto;margin-top:1px;}
+.formnote{font-size:0.86rem;color:var(--ink-soft);margin:16px 0 0;}
+/* Systemstatus sichtbar machen */
+.status{
+  margin:18px 0 0;padding:14px 16px;border-radius:8px;
+  font-size:0.95rem;font-weight:700;display:none;
+}
+.status.show{display:block;}
+.status.ok{background:#E7F1DE;color:#2F4D1B;border:1px solid var(--green-dark);}
+.status.warn{background:var(--amber-tint);color:#4A3A18;border:1px solid var(--amber);}
+
+/* ================= 12. KONTAKT ================= */
+.contact{background:var(--ink);color:var(--paper);}
+.contact h2{color:var(--paper);}
+.contact .lede{color:#D8D6D0;}
+.contact-grid{display:grid;gap:24px;margin-top:34px;}
+@media (min-width:760px){.contact-grid{grid-template-columns:repeat(3,1fr);}}
+.contact-grid h3{
+  color:var(--green);font-size:0.85rem;letter-spacing:0.1em;
+  text-transform:uppercase;margin-bottom:12px;
+}
+.contact-grid p,.contact-grid address{
+  font-style:normal;color:#E2E0DA;font-size:1rem;margin:0 0 8px;
+}
+.contact-grid a{color:var(--paper);font-weight:700;}
+.hours{list-style:none;margin:0;padding:0;}
+.hours li{
+  display:flex;justify-content:space-between;gap:14px;
+  padding:8px 0;border-top:1px solid var(--line-dark);
+  color:#E2E0DA;font-size:0.97rem;
+}
+.hours li:first-child{border-top:none;}
+.hours b{color:var(--paper);}
+.honest{
+  margin:20px 0 0;padding:16px 18px;
+  background:#37373D;border-left:4px solid var(--amber);
+  border-radius:0 8px 8px 0;font-size:0.94rem;color:#E2E0DA;
+}
+.honest a{color:var(--paper);}
+
+/* ================= 13. FUSSZEILE ================= */
+footer{
+  background:#1F1F22;color:#B9B7B0;
+  font-size:0.9rem;padding:44px 0 40px;
+}
+footer h3{
+  color:var(--paper);font-size:0.85rem;letter-spacing:0.1em;
+  text-transform:uppercase;margin-bottom:12px;
+}
+footer a{color:#D8D6D0;}
+.legal-grid{display:grid;gap:28px;}
+@media (min-width:760px){.legal-grid{grid-template-columns:1fr 1fr;}}
+.legal-grid p{margin:0 0 10px;line-height:1.55;}
+.footer-end{
+  margin-top:34px;padding-top:20px;
+  border-top:1px solid #33333A;font-size:0.85rem;
+}
+.todo{
+  background:#3A2F16;border-left:4px solid var(--amber);
+  padding:12px 14px;border-radius:0 6px 6px 0;
+  color:#EBDCBB;font-size:0.85rem;margin:14px 0 0;
+}
+
+/* ============ KLEBENDE ANRUF-LEISTE (nur Handy) ============
+   Fitts: der wichtigste Knopf liegt dort, wo der Daumen ist. */
+.callbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:110;
+  display:flex;gap:8px;
+  padding:10px 12px;
+  background:var(--ink);
+  border-top:1px solid var(--line-dark);
+  box-shadow:0 -4px 16px rgba(0,0,0,.22);
+}
+.callbar .btn{min-height:52px;padding:12px 14px;}
+.callbar .btn-call{flex:1 1 auto;font-size:1.02rem;}
+.callbar .btn-ghost{flex:0 0 auto;font-size:0.88rem;}
+@media (min-width:800px){.callbar{display:none;}}
+
+/* Ankersprünge nicht unter die klebende Kopfzeile schieben */
+:target{scroll-margin-top:88px;}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#inhalt">Direkt zum Inhalt springen</a>
+
+<!-- ================= ABSCHNITT 1: KOPFZEILE ================= -->
+<header class="topbar">
+  <div class="shell inner">
+    <a class="logo" href="#top">
+      <img src="tibe-logo-hell.png" width="64" height="34"
+           alt="TIBE Zerkleinerungstechnik — zum Seitenanfang">
+    </a>
+
+    <nav class="nav" aria-label="Seitenbereiche">
+      <a href="#maschinen">Maschinen</a>
+      <a href="#ablauf">Ablauf</a>
+      <a href="#erfahrung">Erfahrung</a>
+      <a href="#werkstatt">Werkstatt</a>
+      <a href="#planer">Planer</a>
+      <a href="#wartung">Wartung planen</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+
+    <!-- KONTAKTDATEN (1 von 5) — Festnetz in der Kopfzeile -->
+    <a class="topbar-phone" href="tel:+4376736425">
+      <span>Anlage steht? Anrufen</span>
+      07673 6425
+    </a>
+  </div>
+</header>
+
+<main id="inhalt">
+
+<!-- ================= ABSCHNITT 2: ABOVE THE FOLD =================
+     Aufgabe: In drei Sekunden klar machen, was das ist, für wen,
+     und was der Besucher tun soll. Kein Slider, kein Begrüßungstext.
+     Die wichtigste Aussage steht links oben (F-Muster).
+     ============================================================== -->
+<section class="hero" id="top">
+  <div class="shell">
+    <p class="eyebrow" style="color:var(--green);">Reparatur &amp; Service für Zerkleinerungsanlagen</p>
+
+    <h1>Ihr Brecher steht.<br><em>Wir bringen ihn wieder zum Laufen.</em></h1>
+
+    <p class="claim">
+      Herstellerunabhängig — Backenbrecher, Prallmühlen, Walzenbrecher.
+      Jede Marke, jedes Baujahr. Seit 1987 aus Redlham in Oberösterreich.
+    </p>
+
+    <div class="hero-actions">
+      <!-- KONTAKTDATEN (2 von 5) — der eine primäre Knopf der Seite -->
+      <a class="btn btn-call btn-block" href="tel:+4376736425">
+        Jetzt anrufen: <span class="num">07673 6425</span>
+      </a>
+      <a class="btn btn-ghost btn-block" href="#wartung">
+        Wartung planen statt reparieren
+      </a>
+    </div>
+
+    <p class="hero-hours">
+      Büro Mo&nbsp;–&nbsp;Do 7:00&nbsp;–&nbsp;15:45, Fr 7:00&nbsp;–&nbsp;12:00.
+      Außerhalb erreichen Sie uns mobil unter
+      <!-- KONTAKTDATEN (3 von 5) — Mobilnummer für außerhalb der Bürozeiten -->
+      <a href="tel:+436645235244">0664 5235244</a>.
+    </p>
+
+    <ul class="hero-badges">
+      <li>Herstellerunabhängig</li>
+      <li>Verschleißteile für 31 Hersteller</li>
+      <li>Eigene Werkstatt</li>
+      <li>Vor Ort in AT, DE, HU, IT</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= ABSCHNITT 3: DAS PROBLEM =================
+     Aufgabe: Der Besucher erkennt seine eigene Lage wieder.
+     Aufbau Problem → Auswirkung → Lösung. Die Zitate stehen
+     wörtlich in Kundensprache, nicht in Marketingsprache übersetzt.
+     ============================================================ -->
+<section class="problem">
+  <div class="shell">
+    <p class="eyebrow">Das Problem</p>
+    <h2>Jede Stunde Stillstand kostet Geld.<br>Keine Erklärung ändert daran etwas.</h2>
+
+    <div class="grid grid-2" style="margin-top:28px;">
+      <div class="qcard">
+        <blockquote>
+          „Die Anlage steht, jede Stunde kostet uns bares Geld — ich will nicht
+          erklärt bekommen, was genau kaputt ist, ich will einfach, dass wieder
+          produziert wird.“
+        </blockquote>
+        <cite>Betriebsleiter, Schotterwerk</cite>
+      </div>
+      <div class="qcard">
+        <blockquote>
+          „Der Rotor ist wieder fällig, das kommt eh alle paar Monate — ich will
+          nicht jedes Mal neu recherchieren müssen, wer das schnell und
+          ordentlich hinkriegt.“
+        </blockquote>
+        <cite>Technischer Leiter, Recyclingbetrieb</cite>
+      </div>
+    </div>
+
+    <p style="margin-top:28px;color:var(--ink-soft);max-width:62ch;">
+      Der Hersteller ist nicht zuständig oder nicht schnell. Die Maschine ist zu
+      alt, zu exotisch, zu lange aus dem Programm. Und während telefoniert wird,
+      läuft die Produktion nicht — aber die Kosten laufen weiter.
+    </p>
+
+    <p class="answer">
+      Genau dafür sind wir da: Wir fragen nicht, wer die Maschine gebaut hat.
+      Wir machen sie wieder fit.
+    </p>
+  </div>
+</section>
+
+<!-- ================= ABSCHNITT 4: IHRE MASCHINE =================
+     Aufgabe: Der Besucher sucht seine Maschine und muss sie
+     sofort finden, sonst ist er weg.
+     ============================================================== -->
+<section id="maschinen">
+  <div class="shell">
+    <p class="eyebrow">Ihre Maschine ist dabei</p>
+    <h2>Backenbrecher, Prallmühlen, Walzenbrecher</h2>
+    <p class="lede">
+      Reparatur, Instandsetzung und Verschleißteile für die Maschinen der
+      Mineralienaufbereitung — in Steinbrüchen, Kies- und Schottergruben und
+      Recyclingbetrieben.
+    </p>
+
+    <div class="grid grid-3">
+      <div class="card">
+        <p class="kicker">Backenbrecher</p>
+        <h3>Brechbacken, Lager, Schwingen</h3>
+        <p>
+          Einschwingen- und Pendelschwingenbrecher, Laborbrecher. Zwei eigene
+          Patente stecken in unserer Arbeit an dieser Maschinengattung.
+        </p>
+      </div>
+      <div class="card">
+        <p class="kicker">Prallmühlen</p>
+        <h3>Rotorreparatur als Standbein</h3>
+        <p>
+          Rotoren, Schlagleisten, Prallwerke. Der Rotor ist der Teil, der
+          planbar wiederkommt — und der, den wir am häufigsten machen.
+        </p>
+      </div>
+      <div class="card">
+        <p class="kicker">Walzenbrecher</p>
+        <h3>Axiale Walzenverstellung</h3>
+        <p>
+          Unsere Eigenentwicklung: Die Walze wird axial verstellt. Ergebnis ist
+          gleichmäßiger Verschleiß statt Rillenbildung — die Walze hält länger.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-2" style="margin-top:18px;">
+      <div class="card" style="background:var(--paper-alt);border-color:transparent;">
+        <p class="kicker">Verschleißteile</p>
+        <h3>Teile für 31 Hersteller</h3>
+        <p>
+          Auch für Maschinen, die längst aus dem Programm sind. Wenn es ein Teil
+          nicht mehr gibt, fertigen wir es — Sondermaschinenbau ist unsere
+          Wurzel.
+        </p>
+      </div>
+
+      <figure>
+        <!-- Vorhandenes Produktfoto aus dem Briefing.
+             HINWEIS ZUR LADEZEIT: Die PNG-Datei ist rund 2 MB groß.
+             Bitte vor dem Veröffentlichen als JPG oder WebP unter
+             200 kB speichern und hier den Dateinamen tauschen. -->
+        <img class="foto" src="tibe-produktbild.png" loading="lazy"
+             alt="Zerkleinerungsmaschine von TIBE in der Werkstatt, mit dem grünen Dreiecksmuster der Marke und dem TIBE-Logo.">
+        <figcaption>Aus unserer Werkstatt in Redlham.</figcaption>
+      </figure>
+    </div>
+
+    <!-- ================= HERSTELLERWAND =================
+         Aufgabe: Der Besucher sucht den Namen auf seinem Typenschild
+         und muss ihn hier finden.
+         NEUE NAMEN ERGÄNZEN: einfach eine weitere Zeile
+         <li>Name</li> in die Liste unten einfügen.
+         ================================================== -->
+    <div class="marken-block">
+      <h3>Steht einer dieser Namen auf Ihrem Typenschild?</h3>
+      <p class="marken-intro">
+        Für diese Hersteller haben wir schon gearbeitet. Manche dieser Marken
+        werden längst nicht mehr gebaut — genau dann sind wir oft die einzige
+        Adresse, die noch etwas für die Maschine tun kann.
+      </p>
+      <ul class="marken">
+        <li>Brown Lenox</li>
+        <li>Weserhütte</li>
+        <li>Gutehoffnungshütte</li>
+        <li>August Müller</li>
+        <li>Ratzinger</li>
+        <li>Extec</li>
+        <li>Terex</li>
+        <li>Metso</li>
+        <li>Sandvik</li>
+        <li>MFL</li>
+        <li>SBM</li>
+        <li>OM</li>
+        <li class="mehr">und viele weitere</li>
+      </ul>
+      <p class="marken-fuss">
+        Ihre Marke ist nicht dabei? Das heißt fast nie, dass wir nicht helfen
+        können — rufen Sie an und nennen Sie das Typenschild:
+        <a href="tel:+4376736425"><b>07673 6425</b></a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABSCHNITT 5: ABLAUF =================
+     Aufgabe: Die Angst vor dem Unbekannten nehmen und den
+     nächsten Schritt so klein machen, dass er getan wird.
+     ======================================================= -->
+<section id="ablauf" style="background:var(--paper-alt);">
+  <div class="shell">
+    <p class="eyebrow">So läuft ein Einsatz ab</p>
+    <h2>Drei Schritte. Der erste dauert zwei Minuten.</h2>
+
+    <ol class="steps">
+      <li class="step">
+        <h3>Sie rufen an und schildern, was passiert ist</h3>
+        <p>
+          Mehr brauchen wir nicht. Sie müssen nicht wissen, welches Teil kaputt
+          ist, und auch nicht, wer die Maschine gebaut hat. Das finden wir heraus.
+        </p>
+      </li>
+      <li class="step">
+        <h3>Wir befunden und nennen einen Festpreis</h3>
+        <p>
+          Sie erfahren vorher, was die Instandsetzung kostet und wie lange sie
+          dauert. Keine Überraschungen auf der Rechnung.
+        </p>
+      </li>
+      <li class="step">
+        <h3>Wir machen die Maschine wieder fit</h3>
+        <p>
+          Die Kernarbeit passiert meist in unserer eigenen Werkstatt, weil dort
+          das Werkzeug und das Köpfchen sitzen. Wenn es nötig ist, kommen wir zu
+          Ihnen vor Ort. Beraten tun wir weltweit.
+        </p>
+      </li>
+    </ol>
+
+    <div style="margin-top:34px;">
+      <!-- KONTAKTDATEN (4 von 5) — Wiederholung des primären Knopfes -->
+      <a class="btn btn-call btn-block" href="tel:+4376736425">
+        Schritt 1 jetzt erledigen: <span class="num">07673 6425</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABSCHNITT 6: ERFAHRUNG & ZAHLEN =================
+     Aufgabe: Behauptungen durch Belege ersetzen. Adjektive
+     erzeugen kein Vertrauen, Zahlen und Jahre schon.
+     =================================================================== -->
+<section class="proof" id="erfahrung">
+  <div class="shell">
+    <p class="eyebrow" style="color:var(--green);">Erfahrung</p>
+    <h2>Es gibt fast keinen Brecher, den wir nicht schon gemacht haben.</h2>
+    <p class="lede">
+      Wir halten alte Brecher am Laufen. Maschinen, für die es beim Hersteller
+      längst keine Unterstützung mehr gibt, laufen bei unseren Kunden weiter —
+      oft besser als zuvor. Einen Extec C10 von 1995, der acht Jahre
+      gestanden hat, hatten wir nach sechs Wochen wieder in Produktion. Dieses breite Wissen über viele Bauarten und
+      Baujahre ist das, was Sie bei einem Neumaschinenverkäufer nicht bekommen.
+    </p>
+
+    <div class="stats">
+      <div class="stat">
+        <span class="num">1987</span>
+        <span class="label">gegründet — bald 40 Jahre an derselben Sache</span>
+      </div>
+      <div class="stat">
+        <span class="num">100</span>
+        <span class="label">bis zu 100 Reparatur-Einsätze im Jahr</span>
+      </div>
+      <div class="stat">
+        <span class="num">31</span>
+        <span class="label">Hersteller, für die wir Verschleißteile liefern</span>
+      </div>
+      <div class="stat">
+        <span class="num">2</span>
+        <span class="label">eigene Patente im Backenbrecher-Bereich</span>
+      </div>
+    </div>
+
+    <div class="grid grid-2" style="margin-top:34px;">
+      <div class="card" style="background:#37373D;border-color:var(--line-dark);">
+        <p class="kicker" style="color:var(--green);">Partner</p>
+        <h3 style="color:var(--paper);">DSP Přerov seit 1998, dazu Alpcrush</h3>
+        <p style="color:#D8D6D0;">
+          Die Zusammenarbeit mit dem tschechischen Maschinenhersteller DSP
+          Přerov besteht seit 1998. Sie ist der Grund, warum wir auch bei
+          Neumaschinen und großen Umbauten mitreden können.
+        </p>
+      </div>
+      <div class="card" style="background:#37373D;border-color:var(--line-dark);">
+        <p class="kicker" style="color:var(--green);">Standorte</p>
+        <h3 style="color:var(--paper);">Redlham und Linz, Oberösterreich</h3>
+        <p style="color:#D8D6D0;">
+          Von hier aus sind wir in Österreich, Süddeutschland, Ungarn und
+          Norditalien schnell vor Ort. Neun Leute, kurze Wege, keine
+          Konzernfreigabe nötig.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABSCHNITT 7: DIE ALTERNATIVE =================
+     Aufgabe: Die unausgesprochene Alternative im Kopf des Lesers
+     beantworten, bevor er sie selbst googelt.
+     ================================================================= -->
+<section>
+  <div class="shell">
+    <p class="eyebrow">Die naheliegende Alternative</p>
+    <h2>Warum nicht einfach beim Hersteller anrufen?</h2>
+    <p class="lede">
+      Manchmal ist das genau richtig. Oft aber nicht — und der Unterschied
+      entscheidet darüber, wie lange Ihre Anlage steht.
+    </p>
+
+    <div class="vs">
+      <div class="vs-col them">
+        <h3>Beim Neumaschinen-Hersteller</h3>
+        <ul>
+          <li>Zuständig für die eigene Marke</li>
+          <li>Ältere Baureihen fallen aus der Unterstützung</li>
+          <li>Verkauft im Zweifel eine neue Maschine</li>
+          <li>Entscheidungen brauchen Freigaben</li>
+        </ul>
+      </div>
+      <div class="vs-col us">
+        <h3>Bei TIBE</h3>
+        <ul>
+          <li>Herstellerunabhängig, Teile für 31 Hersteller</li>
+          <li>Je älter und exotischer, desto mehr unser Fall</li>
+          <li>Reparieren ist unser Geschäft, nicht Verkaufen</li>
+          <li>Neun Leute, kurze Wege, schnelle Entscheidung</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="fairness">
+      <b>Fair gesagt:</b> Wenn Ihre Maschine neu und in Garantie ist, rufen Sie
+      zuerst beim Hersteller an. Bei allem, was älter ist, aus dem Programm
+      gelaufen oder schon einmal umgebaut wurde, sind wir die schnellere
+      Adresse.
+    </p>
+  </div>
+</section>
+
+<!-- ================= ABSCHNITT 8: AUS DER WERKSTATT =================
+     Aufgabe: Social Proof. Fremde Betriebe haben es schon getan,
+     also ist es sicher.
+
+     ACHTUNG — HIER FEHLEN NOCH ECHTE INHALTE.
+     Die drei Kästen unten sind bewusst leer gelassene Vorlagen.
+     Bitte je Fall ausfüllen: Betrieb (auch anonym reicht),
+     Maschine mit Hersteller und Baujahr, Problem, Dauer, Ergebnis.
+     Keine erfundenen Zahlen einsetzen — lieber zwei echte Fälle
+     als fünf ausgedachte.
+     ================================================================== -->
+<section id="werkstatt" style="background:var(--paper-alt);">
+  <div class="shell">
+    <p class="eyebrow">Aus der Werkstatt</p>
+    <h2>Links das, was angeliefert wurde. Rechts dieselbe Maschine.</h2>
+    <p class="lede">
+      Maschinen behandeln wir wie Patienten: befunden, instand setzen, wieder
+      fit machen. Nicht das Minimum, damit es läuft — das Maximum, das aus der
+      Maschine herauszuholen ist. Zwei Bilder sagen dazu mehr als zwei Seiten
+      Text.
+    </p>
+
+    <p class="answer">
+      Ein Extec C10 von 1995. Acht Jahre gestanden. Nach rund sechs Wochen
+      wieder in Produktion.
+    </p>
+
+    <!-- VORHER / NACHHER
+         Die beiden Bilddateien müssen im selben Ordner liegen wie
+         diese HTML-Datei und genau so heißen:
+             tibe-vorher.jpg
+             tibe-nachher.jpg
+         Vorher bitte auf etwa 1400 px Breite verkleinern und als JPG
+         unter 250 kB speichern — sonst leidet die Ladezeit.
+         Solange eine Datei fehlt, zeigt der Rahmen einen gestreiften
+         Platzhalter mit dem Alternativtext. -->
+    <div class="grid grid-2">
+      <figure>
+        <img class="foto" src="tibe-vorher.jpg" loading="lazy"
+             alt="Backenbrecher Extec C10 von 1995 bei der Anlieferung in der Werkstatt von TIBE: durchgehend Rost, abgeplatzte gelbe Farbe, ausgeschlagene Lagersitze.">
+        <figcaption>
+          <b>Vorher.</b> So ist der Extec C10 bei uns angekommen: Rost über die
+          ganze Fläche, Farbe abgeplatzt, Lagersitze ausgeschlagen. Da hatte
+          er acht Jahre gestanden.
+        </figcaption>
+      </figure>
+      <figure>
+        <img class="foto" src="tibe-nachher.jpg" loading="lazy"
+             alt="Derselbe Extec C10 nach der Instandsetzung durch TIBE: komplett aufgebaut, frisch lackiert, mit beiden Schwungrädern und neuen Verbindungselementen.">
+        <figcaption>
+          <b>Nachher.</b> Komplett aufgebaut, beide Schwungräder gewuchtet,
+          neue Verbindungselemente, frisch lackiert — bereit für den Einbau.
+        </figcaption>
+      </figure>
+    </div>
+
+    <!-- Die Angaben dieses Falls. Hier aendern, wenn ein anderer
+         Fall gezeigt werden soll. -->
+    <div class="fallstreifen">
+      <div>
+        <span class="fl-label">Maschine</span>
+        <span class="fl-wert">Extec C10, Baujahr 1995</span>
+      </div>
+      <div>
+        <span class="fl-label">Stand still</span>
+        <span class="fl-wert">8 Jahre</span>
+      </div>
+      <div>
+        <span class="fl-label">Instandsetzung</span>
+        <span class="fl-wert">rund 6 Wochen</span>
+      </div>
+      <div>
+        <span class="fl-label">Heute</span>
+        <span class="fl-wert">wieder in Produktion</span>
+      </div>
+    </div>
+
+    <p style="margin:24px 0 0;color:var(--ink-soft);max-width:62ch;">
+      Genau das meinen wir mit „besser als zuvor“: Die Maschine geht nicht
+      geflickt zurück, sondern überholt. Wenn Sie so einen Fall vor sich
+      haben, rufen Sie an — wir sagen Ihnen am Telefon, ob sich die
+      Instandsetzung rechnet.
+    </p>
+
+    <div style="margin-top:26px;">
+      <a class="btn btn-call btn-block" href="tel:+4376736425">
+        Fall besprechen: <span class="num">07673 6425</span>
+      </a>
+    </div>
+
+    <!-- WEITERE FÄLLE SPÄTER ERGÄNZEN:
+         Wenn zwei weitere Beispiele vorliegen, diesen Block hier
+         einfügen und die Punkte ersetzen:
+
+         <div class="grid grid-2" style="margin-top:34px;">
+           <div class="card">
+             <p class="kicker">Rotorreparatur</p>
+             <h3>Betrieb, Maschine, Baujahr</h3>
+             <p>Problem, Dauer, Ergebnis.</p>
+           </div>
+           <div class="card">
+             <p class="kicker">Alter oder exotischer Brecher</p>
+             <h3>Betrieb, Maschine, Baujahr</h3>
+             <p>Problem, Dauer, Ergebnis.</p>
+           </div>
+         </div>
+    -->
+  </div>
+</section>
+
+<!-- ================= ABSCHNITT 9: ÜBER UNS =================
+     Aufgabe: Aus einer Firma einen Menschen machen. Das ist der
+     Heimvorteil einer Neunpersonenfirma gegen anonyme Konzerne.
+     ========================================================= -->
+<section class="about">
+  <div class="shell">
+    <p class="eyebrow">Über uns</p>
+    <h2>Wer abhebt, wenn Sie anrufen</h2>
+
+    <div class="about-wrap">
+      <div>
+        <p style="color:var(--ink-soft);">
+          TIBE gibt es seit 1987. Wir sind neun Leute in Redlham und Linz — den
+          Senior eingerechnet, der noch immer dabei ist — und
+          wir bauen keine Maschinen in Serie — wir setzen sie instand und
+          entwickeln, wo es nichts Passendes gibt, selbst etwas. Aus dieser
+          Wurzel im Sondermaschinenbau kommen unsere zwei Patente und die axiale
+          Walzenverstellung.
+        </p>
+        <p style="color:var(--ink-soft);">
+          Was uns antreibt, ist ziemlich einfach: Es ärgert uns, wenn eine gute
+          Maschine wegen eines Teils stillsteht. Deshalb steckt in jeder
+          Instandsetzung Köpfchen und ein gutes Stück Herzblut — präzise,
+          langlebig, effizient, keine Kompromisse.
+        </p>
+
+        <div class="signature">
+          <!-- Ansprechpartner — hier Name und Funktion ändern -->
+          <div class="who">Claus Altmanninger</div>
+          <div class="role">Geschäftsführer, TIBE Zerkleinerungstechnik GmbH</div>
+          <p style="margin:10px 0 0;font-size:0.95rem;color:var(--ink-soft);">
+            Direkt erreichbar unter
+            <a href="tel:+436645235244">0664 5235244</a> oder
+            <a href="mailto:contact@tibe.at">contact@tibe.at</a>.
+          </p>
+        </div>
+      </div>
+
+      <figure>
+        <!-- Teamfoto. Bitte die Bilddatei als tibe-team.jpg in denselben
+             Ordner wie diese HTML-Datei legen.
+             HINWEIS ZUR LADEZEIT: vorher auf etwa 1400 px Breite
+             verkleinern und als JPG unter 250 kB speichern. -->
+        <img class="foto" src="tibe-team.jpg" width="1536" height="1024" loading="lazy"
+             alt="Die Mannschaft von TIBE vor der Werkstatt in Redlham, daneben der Servicetransporter mit dem TIBE-Logo.">
+        <figcaption>
+          Die Mannschaft in Redlham — und der Transporter, der zu Ihnen
+          herausfährt, wenn es vor Ort sein muss.
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABSCHNITT 10: PLANER ZUM MITNEHMEN =================
+     Aufgabe: Wer noch nicht anfragen will, soll trotzdem etwas
+     mitnehmen — und uns dafür eine Adresse dalassen. Ein Feld, ein
+     Knopf, sofortiger Download. Ohne eigenen Server: die Adresse
+     geht über FormSubmit als E-Mail an contact@tibe.at
+     (siehe Skript am Seitenende).
+     ====================================================================== -->
+<section class="planer" id="planer">
+  <div class="shell">
+    <p class="eyebrow" style="color:var(--green);">Planer zum Mitnehmen</p>
+    <h2>Wann ist Ihr Rotor das nächste Mal fällig?</h2>
+    <p class="lede">
+      Unser Verschleißzyklen-Planer rechnet es aus: Bauteil, Intervall und
+      letztes Wechseldatum eintragen — und Sie sehen auf einen Blick, wann
+      der nächste Termin ansteht. Kostenlos, kein Abo. Wir brauchen dafür
+      nur Ihre E-Mail-Adresse.
+    </p>
+
+    <div class="planer-wrap">
+      <div>
+        <ul class="planer-liste">
+          <li>Für Rotor, Backenset, Schlagleisten, Siebe — alles, was bei
+              Ihrer Anlage regelmäßig dran ist.</li>
+          <li>Mit Richtwerten aus der Praxis als Startpunkt, falls Sie Ihre
+              eigenen Zyklen noch nicht in Zahlen haben.</li>
+          <li>Farbig markiert: noch Zeit, in den nächsten 30 Tagen fällig,
+              überfällig.</li>
+          <li>Zum Ausdrucken und in den Werkstattordner hängen.</li>
+        </ul>
+      </div>
+
+      <div class="planer-box">
+        <form id="planer-form" novalidate>
+
+          <!-- Ein Feld. Mehr fragen wir nicht ab. -->
+          <div id="planer-eingabe">
+            <div class="field">
+              <label for="p-mail">Ihre E-Mail-Adresse
+                <span class="hint">Kein Name, keine Firma, keine Telefonnummer —
+                  das brauchen wir dafür nicht.</span>
+              </label>
+              <input id="p-mail" name="email" type="email" autocomplete="email"
+                     inputmode="email" required>
+            </div>
+            <button class="btn btn-call btn-block" type="submit"
+                    style="margin-top:14px;">
+              Planer kostenlos holen
+            </button>
+          </div>
+
+          <!-- ===== Felder für den Versanddienst FormSubmit ===== -->
+          <input type="hidden" name="_subject"
+                 value="Neue Planer-Anforderung über die Website">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <!-- Text der automatischen Antwort an den Besucher.
+               Wird vom Skript am Seitenende gefüllt. -->
+          <input type="hidden" name="_autoresponse" id="p-autoresponse" value="">
+          <!-- Falle für Spam-Roboter: Menschen sehen dieses Feld nicht,
+               Roboter füllen es aus — dann verwirft FormSubmit die Zusendung. -->
+          <input type="text" name="_honey" style="display:none" tabindex="-1"
+                 autocomplete="off">
+
+          <!-- Systemstatus sichtbar machen -->
+          <p class="status" id="planer-status" role="status" aria-live="polite"></p>
+
+          <div class="planer-fertig" id="planer-fertig" hidden>
+            <p>Hier ist Ihr Planer:</p>
+            <a class="btn btn-call btn-block" id="planer-download"
+               href="verschleisszyklen-planer.pdf" download>
+              Verschleißzyklen-Planer öffnen (PDF)
+            </a>
+          </div>
+
+          <p class="planer-privacy">
+            Wir speichern ausschließlich Ihre E-Mail-Adresse und verwenden sie
+            nur, um Ihnen den Planer zu schicken — keine Weitergabe an Dritte,
+            keine Werbe-Mails. Sie können die Löschung jederzeit per E-Mail an
+            <a href="mailto:contact@tibe.at">contact@tibe.at</a> verlangen.
+            Mehr dazu in der <a href="#datenschutz">Datenschutzerklärung</a>.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABSCHNITT 11: FORMULAR =================
+     Aufgabe: Der ruhige Zweitweg für die Persona, die nicht
+     brennt, sondern vorausdenkt. Bewusst nur vier Felder —
+     jedes zusätzliche Pflichtfeld kostet Anfragen.
+     =========================================================== -->
+<section id="wartung">
+  <div class="shell">
+    <p class="eyebrow">Wartung planen</p>
+    <h2>Sie wissen schon, dass der Rotor bald fällig ist?</h2>
+    <p class="lede">
+      Dann müssen Sie nicht warten, bis es klemmt. Schreiben Sie uns kurz, um
+      welche Maschine es geht — wir melden uns mit einem Terminvorschlag
+      zurück. Vier Felder, keine Registrierung.
+    </p>
+
+    <div class="formbox">
+      <form id="anfrage" novalidate>
+        <div class="field">
+          <label for="f-name">Ihr Name
+            <span class="hint">Damit wir wissen, wen wir verlangen sollen.</span>
+          </label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required>
+        </div>
+
+        <div class="field">
+          <label for="f-tel">Telefonnummer für den Rückruf
+            <span class="hint">Wir rufen zurück — schneller als jede E-Mail.</span>
+          </label>
+          <input id="f-tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" required>
+        </div>
+
+        <div class="field">
+          <label for="f-maschine">Um welche Maschine geht es?
+            <span class="hint">Hersteller, Typ, Baujahr — so viel Sie wissen. Ungefähr genügt.</span>
+          </label>
+          <input id="f-maschine" name="maschine" type="text" required>
+        </div>
+
+        <div class="field">
+          <label for="f-was">Was steht an?
+            <span class="hint">Ein paar Sätze reichen. Fachbegriffe sind nicht nötig.</span>
+          </label>
+          <textarea id="f-was" name="was" required></textarea>
+        </div>
+
+        <div class="consent">
+          <input id="f-ok" name="ok" type="checkbox" required>
+          <label for="f-ok" style="font-weight:400;margin:0;">
+            Meine Angaben dürfen zur Bearbeitung dieser Anfrage verwendet
+            werden. Details in der <a href="#datenschutz">Datenschutzerklärung</a>.
+          </label>
+        </div>
+
+        <button class="btn btn-quiet btn-block" type="submit">
+          Anfrage abschicken
+        </button>
+
+        <!-- Sichtbarkeit des Systemstatus (Nielsen Norman Group) -->
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+
+        <p class="formnote">
+          Das Formular öffnet Ihr E-Mail-Programm mit einer vorbereiteten
+          Nachricht an contact@tibe.at — Sie sehen also vor dem Senden genau,
+          was bei uns ankommt. Geht es schneller?
+          <a href="tel:+4376736425">Rufen Sie einfach an: 07673 6425</a>.
+        </p>
+      </form>
+    </div>
+
+    <!-- HINWEIS FÜR DIE SPÄTERE UMSETZUNG:
+         Diese Seite ist eine einzelne HTML-Datei ohne Server und kann
+         deshalb selbst keine E-Mail verschicken. Der Absenden-Knopf
+         baut daher eine fertige Nachricht im E-Mail-Programm des
+         Besuchers auf (siehe Skript am Seitenende).
+         Sobald die Seite auf einem Webserver mit PHP oder einem
+         Formulardienst läuft, hier stattdessen
+         <form action="…" method="post"> setzen und das Skript entfernen. -->
+  </div>
+</section>
+
+</main>
+
+<!-- ================= ABSCHNITT 12: KONTAKT =================
+     Aufgabe: Die letzten Hürden wegräumen — bin ich in seinem
+     Gebiet, ist er jetzt erreichbar, wie erreiche ich ihn.
+     ========================================================= -->
+<section class="contact" id="kontakt">
+  <div class="shell">
+    <p class="eyebrow" style="color:var(--green);">Kontakt</p>
+    <h2>Ein Anruf genügt.</h2>
+    <p class="lede">
+      Sie müssen vorher nichts herausfinden und nichts vorbereiten. Schildern
+      Sie, was los ist — den Rest machen wir.
+    </p>
+
+    <div class="contact-grid">
+      <div>
+        <h3>Anrufen</h3>
+        <!-- KONTAKTDATEN (5 von 5) — Telefon, Mobil, E-Mail -->
+        <p style="font-size:1.35rem;font-weight:800;">
+          <a href="tel:+4376736425">07673 6425</a>
+        </p>
+        <p style="font-size:0.92rem;color:#B9B7B0;">Büro, während der Öffnungszeiten</p>
+        <p style="font-size:1.15rem;font-weight:800;margin-top:14px;">
+          <a href="tel:+436645235244">0664 5235244</a>
+        </p>
+        <p style="font-size:0.92rem;color:#B9B7B0;">Mobil, auch außerhalb der Bürozeiten</p>
+        <p style="margin-top:14px;">
+          <a href="mailto:contact@tibe.at">contact@tibe.at</a>
+        </p>
+      </div>
+
+      <div>
+        <h3>Werkstatt &amp; Anschrift</h3>
+        <address>
+          TIBE Zerkleinerungstechnik GmbH<br>
+          Piesing 21<br>
+          4846 Redlham<br>
+          Österreich
+        </address>
+        <p style="font-size:0.92rem;color:#B9B7B0;margin-top:12px;">
+          Zweiter Standort: Linz.
+          <!-- Wenn der Standort Linz eine eigene Anschrift hat,
+               bitte hier ergänzen. -->
+        </p>
+        <h3 style="margin-top:22px;">Wo wir hinkommen</h3>
+        <p style="font-size:0.95rem;">
+          Österreich, Süddeutschland, Ungarn, Norditalien.
+          Beratung weltweit.
+        </p>
+      </div>
+
+      <div>
+        <h3>Öffnungszeiten</h3>
+        <ul class="hours">
+          <li><b>Mo – Do</b><span>7:00 – 15:45</span></li>
+          <li><b>Freitag</b><span>7:00 – 12:00</span></li>
+          <li><b>Sa – So</b><span>geschlossen</span></li>
+        </ul>
+        <p class="honest">
+          Einen Notdienst rund um die Uhr haben wir nicht — das wäre gelogen.
+          Aber außerhalb der Bürozeiten läuft das Mobiltelefon mit:
+          <a href="tel:+436645235244">0664 5235244</a>. Wenn wir nicht abheben,
+          rufen wir zurück.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABSCHNITT 13: FUSSZEILE =================
+     Pflichtangaben, ohne den Blick vom Anruf abzuziehen.
+     =========================================================== -->
+<footer>
+  <div class="shell">
+    <div class="legal-grid">
+
+      <div id="impressum">
+        <h3>Impressum</h3>
+        <p>
+          <b style="color:var(--paper);">TIBE Zerkleinerungstechnik GmbH</b><br>
+          Piesing 21, 4846 Redlham, Österreich
+        </p>
+        <p>
+          Telefon: <a href="tel:+4376736425">07673 6425</a><br>
+          E-Mail: <a href="mailto:contact@tibe.at">contact@tibe.at</a>
+        </p>
+        <p>
+          Firmenbuchnummer: FN 223926 d<br>
+          Firmenbuchgericht / Gerichtsstand: Wels<br>
+          UID-Nummer: ATU 54579308
+        </p>
+        <p>
+          Geschäftsführer: Claus Altmanninger<br>
+          Unternehmensgegenstand: Reparatur, Instandsetzung und Handel von
+          Zerkleinerungsmaschinen<br>
+          Mitglied der Wirtschaftskammer Oberösterreich
+        </p>
+        <div class="todo">
+          Noch zu ergänzen: zuständige Gewerbebehörde
+          (Bezirkshauptmannschaft Vöcklabruck), anwendbare gewerberechtliche
+          Vorschriften und gegebenenfalls die Angaben zur
+          Online-Streitbeilegung. Bitte vor dem Veröffentlichen rechtlich
+          prüfen lassen.
+        </div>
+      </div>
+
+      <div id="datenschutz">
+        <h3>Datenschutz</h3>
+        <p>
+          <b style="color:var(--paper);">Diese Seite setzt keine Cookies</b> und
+          verwendet keine Analyse- oder Werbedienste. Beim Aufruf der Seite werden keine
+          Inhalte von fremden Servern geladen — keine Schriftarten, keine
+          Karten, keine Videos.
+        </p>
+        <p>
+          <b style="color:var(--paper);">Anfrageformular:</b> Ihre Eingaben
+          werden nicht automatisch an uns übertragen. Der Knopf öffnet Ihr
+          eigenes E-Mail-Programm mit einer vorbereiteten Nachricht. Erst wenn
+          Sie dort selbst auf Senden drücken, erreichen uns Ihre Angaben — und
+          wir verwenden sie ausschließlich, um Ihre Anfrage zu bearbeiten.
+        </p>
+        <p>
+          <b style="color:var(--paper);">Planer zum Mitnehmen:</b> Wenn Sie den
+          Verschleißzyklen-Planer anfordern, übermitteln Sie uns ausschließlich
+          Ihre E-Mail-Adresse — mehr fragt das Formular nicht ab. Den
+          technischen Versand übernimmt der Dienst FormSubmit (formsubmit.co):
+          Ihre Adresse wird dort verarbeitet und als E-Mail an contact@tibe.at
+          weitergeleitet. Wir verwenden sie nur, um Ihnen den Planer zu
+          schicken — keine Weitergabe an Dritte, keine Werbe-Mails. Die
+          Löschung können Sie jederzeit verlangen.
+        </p>
+        <p>
+          <b style="color:var(--paper);">Ihre Rechte:</b> Sie können jederzeit
+          Auskunft, Berichtigung oder Löschung Ihrer Daten verlangen — per
+          E-Mail an <a href="mailto:contact@tibe.at">contact@tibe.at</a>.
+          Beschwerdestelle ist die Österreichische Datenschutzbehörde.
+        </p>
+        <div class="todo">
+          Noch zu ergänzen, sobald die Seite auf einem Webserver läuft:
+          Angaben zu Server-Logdateien beim Hosting-Anbieter und
+          Aufbewahrungsfristen. Falls später ein echtes Serverformular oder
+          eine Karte eingebaut wird, muss dieser Abschnitt erweitert werden.
+          Zur Planer-Anforderung außerdem: Anbieter, Firmensitz und
+          Auftragsverarbeitung von FormSubmit benennen und prüfen, ob dabei
+          Daten in ein Drittland übermittelt werden. Bitte rechtlich prüfen
+          lassen.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-end">
+      <a class="logo" href="#top">
+        <img src="tibe-logo-hell.png" width="57" height="30"
+             alt="TIBE Zerkleinerungstechnik — zum Seitenanfang">
+      </a>
+      <p style="margin:12px 0 0;">
+        © 2026 TIBE Zerkleinerungstechnik GmbH · Zerkleinerungstechnik seit 1987
+        · Redlham und Linz, Oberösterreich
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- ====== KLEBENDE ANRUF-LEISTE, NUR AUF DEM HANDY ====== -->
+<div class="callbar" role="group" aria-label="Direkt anrufen">
+  <a class="btn btn-call" href="tel:+4376736425">Jetzt anrufen</a>
+  <a class="btn btn-ghost" href="tel:+436645235244" aria-label="Mobil anrufen, auch außerhalb der Bürozeiten">Mobil</a>
+</div>
+
+<script>
+/* Formular: baut aus den Eingaben eine fertige E-Mail und öffnet
+   das E-Mail-Programm des Besuchers.
+   Empfängeradresse hier ändern: */
+var EMPFAENGER = "contact@tibe.at";
+
+(function () {
+  var form = document.getElementById("anfrage");
+  var status = document.getElementById("status");
+  if (!form) return;
+
+  function melde(text, art) {
+    status.textContent = text;
+    status.className = "status show " + art;
+  }
+
+  form.addEventListener("submit", function (ereignis) {
+    ereignis.preventDefault();
+
+    /* Fehlervermeidung: erst prüfen, dann handeln, und beim ersten
+       fehlenden Feld den Fokus dorthin setzen. */
+    var pflicht = ["f-name", "f-tel", "f-maschine", "f-was", "f-ok"];
+    for (var i = 0; i < pflicht.length; i++) {
+      var feld = document.getElementById(pflicht[i]);
+      var leer = feld.type === "checkbox" ? !feld.checked : !feld.value.trim();
+      if (leer) {
+        melde(
+          feld.type === "checkbox"
+            ? "Bitte setzen Sie noch das Häkchen zur Datenverwendung."
+            : "Bitte füllen Sie noch das markierte Feld aus.",
+          "warn"
+        );
+        feld.focus();
+        return;
+      }
+    }
+
+    var name = document.getElementById("f-name").value.trim();
+    var tel = document.getElementById("f-tel").value.trim();
+    var masch = document.getElementById("f-maschine").value.trim();
+    var was = document.getElementById("f-was").value.trim();
+
+    var betreff = "Wartungsanfrage: " + masch;
+    var text =
+      "Anfrage über die Website\n\n" +
+      "Name: " + name + "\n" +
+      "Telefon für Rückruf: " + tel + "\n" +
+      "Maschine: " + masch + "\n\n" +
+      "Was ansteht:\n" + was + "\n";
+
+    window.location.href =
+      "mailto:" + EMPFAENGER +
+      "?subject=" + encodeURIComponent(betreff) +
+      "&body=" + encodeURIComponent(text);
+
+    melde(
+      "Ihr E-Mail-Programm öffnet sich mit der fertigen Nachricht. " +
+      "Bitte dort noch auf Senden drücken. Öffnet sich nichts? " +
+      "Rufen Sie uns einfach an: 07673 6425.",
+      "ok"
+    );
+  });
+})();
+
+/* ---------- Planer zum Mitnehmen: E-Mail-Adresse gegen PDF ----------
+   Diese Seite hat keinen eigenen Server. Die eingetragene Adresse geht
+   deshalb über den kostenlosen Dienst FormSubmit (formsubmit.co) als
+   E-Mail an die Adresse in PLANER_EMPFAENGER.
+   Den Planer selbst schaltet die Seite sofort frei — der Besucher muss
+   auf keine Mail warten. */
+var PLANER_EMPFAENGER = "contact@tibe.at";
+/* Nur Rückfallebene für den Link in der automatischen Antwortmail, falls
+   die Seite lokal per Doppelklick geöffnet wird. Liegt die Seite auf dem
+   Webserver, wird die Adresse der PDF von selbst berechnet. */
+var PLANER_PDF_FEST = "https://www.tibe.at/verschleisszyklen-planer.pdf";
+
+(function () {
+  var form = document.getElementById("planer-form");
+  if (!form) return;
+
+  var feld = document.getElementById("p-mail");
+  var eingabe = document.getElementById("planer-eingabe");
+  var status = document.getElementById("planer-status");
+  var fertig = document.getElementById("planer-fertig");
+  var download = document.getElementById("planer-download");
+  var antwort = document.getElementById("p-autoresponse");
+  var laeuft = false;
+
+  function melde(text, art) {
+    status.textContent = text;
+    status.className = "status show " + art;
+  }
+
+  /* Vollständige Adresse der PDF, aus der Adresse dieser Seite berechnet.
+     So muss beim Hochladen hier nichts nachgetragen werden. */
+  function pdfAdresse() {
+    if (location.protocol === "http:" || location.protocol === "https:") {
+      return new URL(download.getAttribute("href"), location.href).href;
+    }
+    return PLANER_PDF_FEST;
+  }
+
+  /* Text der automatischen Antwort an den Besucher. */
+  function antwortText() {
+    return "Danke für Ihr Interesse — hier ist der Verschleißzyklen-Planer:\n" +
+      pdfAdresse() + "\n\n" +
+      "Bauteil, Intervall und letztes Wechseldatum eintragen, den nächsten " +
+      "Termin rechnet der Planer selbst aus.\n\n" +
+      "Sie wissen nicht, mit welchen Intervallen Sie bei Ihrer Maschine " +
+      "rechnen müssen? Schreiben Sie uns kurz, welche Anlage Sie haben — " +
+      "wir sagen Ihnen, womit Sie rechnen können.\n\n" +
+      "TIBE Zerkleinerungstechnik GmbH\n" +
+      "Redlham und Linz, Oberösterreich\n" +
+      "contact@tibe.at, Telefon 07673 6425";
+  }
+
+  /* Den Planer freischalten und den Knopf in den Fokus holen. */
+  function planerFreischalten() {
+    eingabe.hidden = true;
+    fertig.hidden = false;
+    download.focus();
+  }
+
+  form.addEventListener("submit", function (ereignis) {
+    ereignis.preventDefault();
+    if (laeuft) return;
+
+    /* Erst prüfen, dann handeln — und beim Fehler den Fokus ins Feld. */
+    var adresse = feld.value.trim();
+    var affe = adresse.indexOf("@");
+    if (affe < 1 || adresse.indexOf(".", affe) < affe + 2) {
+      melde("Bitte tragen Sie noch eine gültige E-Mail-Adresse ein.", "warn");
+      feld.focus();
+      return;
+    }
+
+    laeuft = true;
+    melde("Wird gesendet …", "ok");
+    antwort.value = antwortText();
+
+    fetch("https://formsubmit.co/ajax/" + PLANER_EMPFAENGER, {
+      method: "POST",
+      headers: { "Accept": "application/json" },
+      body: new FormData(form)
+    })
+      .then(function () {
+        melde("Danke, wir haben Ihre Adresse.", "ok");
+        planerFreischalten();
+      })
+      .catch(function () {
+        /* Auch wenn der Versanddienst gerade nicht erreichbar ist, soll
+           niemand mit leeren Händen dastehen: Planer trotzdem freigeben. */
+        melde("Ihre Adresse konnten wir gerade nicht übermitteln — der " +
+              "Planer steht aber unten für Sie bereit.", "warn");
+        planerFreischalten();
+      })
+      .then(function () { laeuft = false; });
+  });
+})();
+</script>
+
+</body>
+</html>

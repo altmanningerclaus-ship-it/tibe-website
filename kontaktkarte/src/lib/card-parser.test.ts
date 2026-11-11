@@ -69,3 +69,18 @@ test('Mobilnummer mit (0) und Schrägstrich', () => {
   assert.equal(r.company, 'Meier & Partner OG');
   assert.equal(r.website, 'www.meier-partner.at');
 });
+
+test('Trennzeichen | und · in einer Zeile', () => {
+  const r = parseCardText([
+    'STEINER BAU',
+    'Ing. Peter Steiner',
+    'Bauleiter',
+    'Steiner Bau GmbH · Annenstraße 30, 8020 Graz',
+    'Tel. +43 316 82 70 0 | Mobil +43 664 120 90 33',
+  ]);
+  assert.equal(r.company, 'Steiner Bau GmbH');
+  assert.equal(r.street, 'Annenstraße 30');
+  assert.equal(r.city, 'Graz');
+  assert.equal(r.phone, '+43 316 82 70 0');
+  assert.equal(r.mobile, '+43 664 120 90 33');
+});

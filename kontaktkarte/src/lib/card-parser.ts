@@ -146,6 +146,8 @@ export function parseCardText(blocks: string[]): ParsedCard {
 
   const lines = blocks
     .flatMap((b) => b.split(/\r?\n/))
+    // „Tel. … | Mobil …“ oder „Firma · Straße“ sind eigentlich mehrere Angaben
+    .flatMap((l) => l.split(/\s+[|•·]\s+/))
     .map(clean)
     .filter((l) => l.length > 1);
 

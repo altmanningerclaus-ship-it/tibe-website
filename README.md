@@ -38,3 +38,9 @@ git add -A
 git commit -m "Text angepasst"
 git push
 ```
+
+## Unterordner `kontaktkarte/`
+
+Enthält die private Handy-App „Kontaktkarte“ (Expo / React Native) – unabhängig
+von der Website. Details, Datenbankschema und Installationsanleitung:
+[`kontaktkarte/README.md`](kontaktkarte/README.md).

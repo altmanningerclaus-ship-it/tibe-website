@@ -24,7 +24,7 @@ const config: ExpoConfig = {
   android: {
     package: 'at.tibe.kontaktkarte',
     adaptiveIcon: {
-      backgroundColor: '#E6F4FE',
+      backgroundColor: '#1F5FBF',
       foregroundImage: './assets/android-icon-foreground.png',
       backgroundImage: './assets/android-icon-background.png',
       monochromeImage: './assets/android-icon-monochrome.png',
@@ -42,6 +42,16 @@ const config: ExpoConfig = {
   },
   plugins: [
     'expo-router',
+    [
+      'expo-splash-screen',
+      {
+        image: './assets/splash-icon.png',
+        imageWidth: 220,
+        resizeMode: 'contain',
+        backgroundColor: '#F4F5F7',
+        dark: { image: './assets/splash-icon.png', backgroundColor: '#0E1013' },
+      },
+    ],
     'expo-sqlite',
     'expo-sharing',
     '@react-native-community/datetimepicker',
